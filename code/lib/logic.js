@@ -1,31 +1,27 @@
-
-
 /**
  * Sample transaction processor function.
  */
 
-
-
 function onSetSensorTemp(setSensorTemp) {
-    setSensorTemp.gauge.sensorTemp = setSensorTemp.newSensorValue; 
-    return getAssetRegistry('org.acme.sample.Sensor')
-      .then(function (assetRegistry) {
-          return assetRegistry.update(setSensorTemp.gauge);
-      });
+  setSensorTemp.gauge.sensorTemp = setSensorTemp.newSensorValue; 
+  return getAssetRegistry('org.acme.sample.Sensor')
+    .then(function (assetRegistry) {
+        return assetRegistry.update(setSensorTemp.gauge);
+    });
 }
 
 function onChangeThermostatTemp(changeThermostat) {
   var diff = Math.abs(changeThermostat.thermostat.sensorTemp - changeThermostat.newThermostatValue);
-    if (diff <= 3) {
-      changeThermostat.thermostat.thermostatTemp = changeThermostat.newThermostatValue;
-      return getAssetRegistry('org.acme.sample.Sensor')
-        .then(function (assetRegistry) {
-          return assetRegistry.update(changeThermostat.thermostat);
-      });
-    } else {
-      //reject transaction
-      throw new Error("Too much difference! Current sensor reading " + changeThermostat.thermostat.sensorTemp);
-    }
+  if (diff <= 3) {
+    changeThermostat.thermostat.thermostatTemp = changeThermostat.newThermostatValue;
+    return getAssetRegistry('org.acme.sample.Sensor')
+      .then(function (assetRegistry) {
+        return assetRegistry.update(changeThermostat.thermostat);
+    });
+  } else {
+    //reject transaction
+    throw new Error("Too much difference! Current sensor reading " + changeThermostat.thermostat.sensorTemp);
+  }
 }
 
 function onCompareWeather(compareWeather) {

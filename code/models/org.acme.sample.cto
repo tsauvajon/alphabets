@@ -7,7 +7,7 @@ namespace org.acme.sample
 asset Sensor identified by teamID {
   o String teamID
   o String teamName
-  o Double sensotTemp
+  o Double sensorTemp
   o Double thermostatTemp
   o String recommandation
 }
