@@ -9,7 +9,7 @@ asset Sensor identified by teamID {
   o String teamName
   o Double sensorTemp
   o Double thermostatTemp
-  o String recommandation
+  o String recommendation
 }
 
 transaction SetSensorTemp {
@@ -23,7 +23,7 @@ transaction ChangeThermostatTemp {
 }
 
 transaction CompareWeather{
-  --> Sensor recommand
+  --> Sensor recommend
   o Double outsideTemp
   o Double feelsLike
 }
