@@ -1,0 +1,25 @@
+/**
+ * business network definition.
+ */
+namespace org.acme.sample
+
+asset Sensor identified by teamID {
+  //create your Team asset model
+  o String teamID
+}
+
+transaction SetSensorTemp {
+  //create your SetSensorTemp transaction model
+  
+}
+
+transaction ChangeThermostatTemp {
+  //create your ChangeThermostatTemp transaction model
+  
+}
+
+transaction CompareWeather{
+  //create your CompareWeather transaction model
+  
+}
+
