@@ -18,7 +18,7 @@ transaction SetSensorTemp {
 }
 
 transaction ChangeThermostatTemp {
-  --> Sensor gauge
+  --> Sensor thermostat
   o Double newThermostatValue
 }
 
