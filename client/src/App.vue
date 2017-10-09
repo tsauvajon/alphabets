@@ -1,13 +1,19 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <logo></logo>
     <router-view/>
   </div>
 </template>
 
 <script>
+import Logo from '@/components/Logo'
+
 export default {
-  name: 'app'
+  name: 'app',
+
+  components: {
+    Logo
+  }
 }
 </script>
 
@@ -17,7 +23,11 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #333333;
   margin-top: 60px;
+}
+
+strong {
+  color: #C52B2B;
 }
 </style>
