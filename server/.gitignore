@@ -16,3 +16,6 @@
 # VS Code debug
 debug
 debug.*
+
+# Deps
+vendor/

@@ -24,7 +24,7 @@ yarn dev
 cd ../server
 
 # Get the dependencies
-go get
+dep ensure
 
 # Build the server
 go build
