@@ -11,7 +11,7 @@ script:
   - cd client
   - yarn
   - yarn lint
-  # - yarn unit
+  - yarn unit
   - yarn build
   - cd ../server
   - go get
