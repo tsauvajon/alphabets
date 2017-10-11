@@ -46,7 +46,15 @@ Browse http://localhost:{PORT}
 
 ## CI
 
-TODO
+Node
+- lint avec ESLint
+- tests unitaires avec Karma / Mocha / Sinon
+- build
+
+Go
+- TODO : lint
+- TODO : tests unitaires
+- build
 
 ## Deployment
 
