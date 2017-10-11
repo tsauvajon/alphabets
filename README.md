@@ -1,4 +1,6 @@
 # AlphaBets
+[![Build Status](https://travis-ci.org/tsauvajon/ws-blockchain.svg?branch=dev)](https://travis-ci.org/tsauvajon/ws-blockchain)
+
 ![logo](https://github.com/tsauvajon/ws-blockchain/blob/dev/logo-mini.png?raw=true)
 
 Chainblock applied to betting.
