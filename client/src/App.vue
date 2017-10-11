@@ -31,3 +31,7 @@ strong {
   color: #C52B2B;
 }
 </style>
+
+<style lang="stylus">
+  @require './stylus/main'
+</style>
