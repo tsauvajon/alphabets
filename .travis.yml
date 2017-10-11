@@ -9,7 +9,8 @@ env:
     - NODE_ENV=production
 script:
   - cd client
-  - yarn
+  # install also the dev dependencies
+  - yarn install --production=false
   - yarn lint
   - yarn unit
   - yarn build
