@@ -14,6 +14,10 @@ export default {
 }
 </script>
 
+<style lang="stylus">
+  @require './stylus/main'
+</style>
+
 <style>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -25,8 +29,4 @@ export default {
 strong {
   color: #C52B2B;
 }
-</style>
-
-<style lang="stylus">
-  @require './stylus/main'
 </style>
