@@ -1,19 +1,16 @@
 <template>
-  <div id="app">
-    <logo></logo>
-    <router-view/>
-  </div>
+<v-app id="app">
+    <main>
+      <v-content>
+        <router-view></router-view>
+      </v-content>
+    </main>
+</v-app>
 </template>
 
 <script>
-import Logo from '@/components/Logo'
-
 export default {
-  name: 'app',
-
-  components: {
-    Logo
-  }
+  name: 'app'
 }
 </script>
 
@@ -22,9 +19,7 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #333333;
-  margin-top: 60px;
+  color: #333;
 }
 
 strong {
