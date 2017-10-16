@@ -3,8 +3,6 @@ package sportmonks
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
-	"net/http"
 	"strconv"
 )
 
@@ -32,38 +30,12 @@ type Team struct {
 
 // GetTeam : retrieves a team from the sportmonks API
 func GetTeam(teamID int) (Team, error) {
-	client := &http.Client{}
+	uri := "teams/" + strconv.Itoa(teamID)
 
-	url := fmt.Sprintf("https://soccer.sportmonks.com/api/v2.0/teams/" + strconv.Itoa(teamID) + "?api_token=QCaGhUsahBbiKEQPGINe7G843Jr5qSsdKmPpUpvR4MJee7xGYw4t63z4YgkO")
-
-	// Prepare the request
-	req, err := http.NewRequest("GET", url, nil)
+	response, err := getAnything(uri)
 
 	if err != nil {
-		return Team{}, fmt.Errorf("Error creating the team: %v", err)
-	}
-
-	// Execute the request
-	res, err := client.Do(req)
-
-	if err != nil {
-		return Team{}, fmt.Errorf("Error executing the GetTeam request: %v", err)
-	}
-
-	defer res.Body.Close()
-
-	var response Response
-
-	// Read the response
-	body, err := ioutil.ReadAll(res.Body)
-
-	if err != nil {
-		return Team{}, fmt.Errorf("Error reading the response body: %v", err)
-	}
-
-	// Unmarshal the response : { data: { ... }, meta: { ... }}
-	if err = json.Unmarshal(body, &response); err != nil {
-		return Team{}, fmt.Errorf("Error unmarshalling the response: %v", err)
+		return Team{}, fmt.Errorf("Error getting the data: %v", err)
 	}
 
 	var team Team
