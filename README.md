@@ -5,12 +5,12 @@
 
 Chainblock applied to betting.
 
+Alpha for innovation - Bets for Betting => AlphaBets
+
 ## SportMonks
 
 Special thanks to [SportMonks](https://sportmonks.com) for giving us access to the Ligue 1
 ![SportMonks logo](https://www.sportmonks.com/images/logos/logo_black_top.png)
-
-Alpha for innovation - Bets for Betting => AlphaBets
 
 ## Getting started
 
@@ -69,13 +69,14 @@ Browse http://localhost:{PORT}
 
 **Node**
 - lint avec ESLint
+
+- TODO : unit testing
 - tests unitaires avec Karma / Mocha / Sinon
 - build
 
 **Go**
 - lint : go lint
 - auto format : go fmt
-- TODO : unit testing
 - build
 
 ## Deployment
