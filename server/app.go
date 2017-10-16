@@ -7,6 +7,8 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/tsauvajon/ws-blockchain/server/sportmonks"
+
 	"github.com/gorilla/mux"
 )
 
@@ -58,6 +60,11 @@ func (app *App) indexHandler(w http.ResponseWriter, r *http.Request) {
 func (app *App) Initialize() {
 	app.Router = mux.NewRouter()
 	app.initializeRoutes()
+
+	// Initialize the SportMonks package
+	if err := sportmonks.Initialize(); err != nil {
+		panic(err)
+	}
 }
 
 // Run : Runs the application
