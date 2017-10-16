@@ -5775,6 +5775,10 @@ vuetify@^0.16.5:
   version "0.16.5"
   resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-0.16.5.tgz#7fdb55d480b17391a19288fe1fb684018cab6bdd"
 
+vuex@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/vuex/-/vuex-3.0.0.tgz#98b4b5c4954b1c1c1f5b29fa0476a23580315814"
+
 watchpack@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/watchpack/-/watchpack-1.4.0.tgz#4a1472bcbb952bd0a9bb4036801f954dfb39faac"
