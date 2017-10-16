@@ -15,3 +15,6 @@
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# Executables
+*.exe

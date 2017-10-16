@@ -1,0 +1,19 @@
+language: go
+node_js:
+  - "8"
+go: 
+  - "1.9"
+env:
+  global:
+    - CI=true
+    - NODE_ENV=production
+script:
+  - cd client
+  # install also the dev dependencies
+  - yarn install --production=false
+  - yarn lint
+  - yarn unit
+  - yarn build
+  - cd ../server
+  - go get
+  - go build
