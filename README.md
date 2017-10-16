@@ -8,7 +8,7 @@ Chainblock applied to betting.
 ## SportMonks
 
 Special thanks to [SportMonks](https://sportmonks.com) for giving us access to the Ligue 1
-![SportMonks logo](https://www.sportmonks.com/images/logos/logo_black_top.png)]
+![SportMonks logo](https://www.sportmonks.com/images/logos/logo_black_top.png)
 
 Alpha for innovation - Bets for Betting => AlphaBets
 
