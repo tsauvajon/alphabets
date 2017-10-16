@@ -15,13 +15,6 @@ type App struct {
 	Router *mux.Router
 }
 
-type Response struct {
-	// Data : string
-	Data Team `json:"data"`
-	// Number
-	Meta map[string]interface{} `json:"meta"`
-}
-
 func respondWithJSON(w http.ResponseWriter, code int, payload interface{}) {
 	response, _ := json.Marshal(payload)
 
@@ -66,6 +59,6 @@ func (app *App) Initialize() {
 
 // Run : Runs the application
 func (app *App) Run(addr string) {
-	fmt.Print("Running at ", addr)
+	fmt.Println("Running at ", addr)
 	log.Fatal(http.ListenAndServe(addr, app.Router))
 }
