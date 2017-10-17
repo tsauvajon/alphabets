@@ -17,6 +17,12 @@ type Response struct {
 	Meta map[string]interface{} `json:"meta"`
 }
 
+type ArrayResponse struct {
+	Data []map[string]interface{} `json:"data"`
+	// Number
+	Meta map[string]interface{} `json:"meta"`
+}
+
 var (
 	apiURI      = "https://soccer.sportmonks.com/api/v2.0/"
 	suffix      = "?api_token="
@@ -90,6 +96,48 @@ func getAnything(endpointWithParameters string) (Response, error) {
 	// Unmarshal the response : { data: { ... }, meta: { ... }}
 	if err = json.Unmarshal(body, &response); err != nil {
 		return Response{}, fmt.Errorf("Error unmarshalling the response: %v", err)
+	}
+
+	return response, nil
+}
+
+func getAnythingArray(endpointWithParameters string) (ArrayResponse, error) {
+	if !initialized {
+		return ArrayResponse{}, errors.New("Error: the SportMonks token isn't initialized")
+	}
+
+	client := &http.Client{}
+
+	url := apiURI + endpointWithParameters + suffix + token
+
+	// Prepare the request
+	req, err := http.NewRequest("GET", url, nil)
+
+	if err != nil {
+		return ArrayResponse{}, fmt.Errorf("Error creating the request: %v", err)
+	}
+
+	// Execute the request
+	res, err := client.Do(req)
+
+	if err != nil {
+		return ArrayResponse{}, fmt.Errorf("Error executing the request: %v", err)
+	}
+
+	defer res.Body.Close()
+
+	var response ArrayResponse
+
+	// Read the response
+	body, err := ioutil.ReadAll(res.Body)
+
+	if err != nil {
+		return ArrayResponse{}, fmt.Errorf("Error reading the response body: %v", err)
+	}
+
+	// Unmarshal the response : { data: { ... }, meta: { ... }}
+	if err = json.Unmarshal(body, &response); err != nil {
+		return ArrayResponse{}, fmt.Errorf("Error unmarshalling the response: %v", err)
 	}
 
 	return response, nil
