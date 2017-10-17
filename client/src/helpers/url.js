@@ -10,11 +10,14 @@ const getTeamById = (base) => (id) => axios.get(`${base}/teams/${id}`)
 
 const getFixtures = (base) => (begin, end) => axios.get(`${base}/fixtures/${begin}/${end}`)
 
+const getOddsByFixture = (base) => (id) => axios.get(`${base}/odds/fixture/${id}`)
+
 const test = (base) => () => axios.get(`${base}/test`)
 
 const soccer = (base) => ({
   getTeamById: getTeamById(`${base}/${soccerPrefix}`),
-  getFixtures: getFixtures(`${base}/${soccerPrefix}`)
+  getFixtures: getFixtures(`${base}/${soccerPrefix}`),
+  getOddsByFixture: getOddsByFixture(`${base}/${soccerPrefix}`)
 })
 
 const blockchain = (base) => ({

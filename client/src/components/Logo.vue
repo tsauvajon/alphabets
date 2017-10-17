@@ -17,15 +17,14 @@ export default {
   name: 'logo',
 
   mounted () {
-    const logoAnimation = anime.timeline()
+    const logoAnimation = anime.timeline({loop: true})
 
     logoAnimation.add({
       targets: '.ml5 .line',
       opacity: [0.5, 1],
       scaleX: [0, 1],
       easing: 'easeInOutExpo',
-      duration: 700,
-      delay: 600
+      duration: 500
     })
 
     logoAnimation.add({
@@ -63,6 +62,14 @@ export default {
       easing: 'easeOutExpo',
       duration: 600,
       offset: '-=600'
+    })
+
+    logoAnimation.add({
+      targets: '.ml5',
+      opacity: 0,
+      duration: 500,
+      easing: 'easeOutExpo',
+      delay: 200
     })
   }
 }
