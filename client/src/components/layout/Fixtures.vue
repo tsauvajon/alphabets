@@ -2,7 +2,7 @@
 <v-container fluid grid-list-md>
   <v-layout v-if="fixtures" row wrap>
     <v-flex
-      xs12 md4
+      xs12 lg4
       v-for="fixture in fixtures"
       :key="fixture.id"
     >

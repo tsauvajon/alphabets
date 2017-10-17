@@ -49,10 +49,7 @@ export default {
       console.log('teams not loaded yet')
     }
 
-    console.log('id:', id)
-
     let team = this.teams.find(t => {
-      console.log(t.id)
       return t.id === id
     })
 
