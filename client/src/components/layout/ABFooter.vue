@@ -1,6 +1,6 @@
 <template>
 <v-footer app>
-Footer
+<span class="accent--text">AlphaBets</span>
 </v-footer>
 </template>
 

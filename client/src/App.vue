@@ -39,4 +39,8 @@ export default {
 strong {
   color: #C52B2B;
 }
+
+h1, h2, h3 {
+  font-family: 'Maven Pro', 'Helvetica','Arial', 'Roboto', sans-serif;
+}
 </style>
