@@ -1,8 +1,8 @@
 <template>
 <div>
-    <div style="height: 20px"></div>
-    <h2 class="text-xs-center accent--text">Upcoming matches</h2>
-    <fixtures></fixtures>
+  <div style="height: 20px"></div>
+  <h2 class="text-xs-center accent--text">Fixtures</h2>
+  <fixtures></fixtures>
 </div>
 </template>
 
