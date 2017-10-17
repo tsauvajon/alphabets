@@ -17,7 +17,7 @@ type Odds struct {
 }
 
 //getTeam method return Team
-func (app *App) getTeam(w http.ResponseWriter, r *http.Request) {
+func (app *App) getTeamByID(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id, err := strconv.Atoi(vars["id"])
 
