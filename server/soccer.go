@@ -5,11 +5,11 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/geoffreydalfin/ws-blockchain/server/sportmonks"
 	"github.com/gorilla/mux"
+	"github.com/tsauvajon/ws-blockchain/server/sportmonks"
 )
 
-func (app *App) getTeam(w http.ResponseWriter, r *http.Request) {
+func (app *App) getTeamByID(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id, err := strconv.Atoi(vars["id"])
 
