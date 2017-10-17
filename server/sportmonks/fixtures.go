@@ -5,6 +5,7 @@ import (
 	"fmt"
 )
 
+// Fixture struct fixture
 type Fixture struct {
 	Id            int           `json:"id"`
 	LeagueId      int           `json:"league_id"`
@@ -30,16 +31,14 @@ type Fixture struct {
 	// TV            Response      `json:"tvstations"`
 }
 
+//GetFixture get Fixture with date deb and date fin
 func GetFixture(deb, fin string) ([]Fixture, error) {
 	uri := "fixtures/between/" + deb + "/" + fin
 	response, err := getAnythingArray(uri)
-
 	if err != nil {
 		return []Fixture{}, fmt.Errorf("Error getting the data: %v", err)
 	}
-
 	var fixtures []Fixture
-
 	// Marshal the data part in order to decode it from JSON later
 	jsonEncodedFixture, err := json.Marshal(response.Data)
 
@@ -54,11 +53,9 @@ func GetFixture(deb, fin string) ([]Fixture, error) {
 	for i, fixture := range fixtures {
 		hometeam, _ := GetTeam(fixture.LocalteamId)
 		visitorteam, _ := GetTeam(fixture.VisitorteamId)
-		//bet, _ := GetBet(fixture.Id)
+		GetBet(fixture.Id)
 		fixtures[i].LocalTeam = hometeam
 		fixtures[i].VisitorTeam = visitorteam
-		//fixtures[i]. =
-
 	}
 	return fixtures, nil
 }
