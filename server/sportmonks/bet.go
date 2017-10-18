@@ -13,7 +13,7 @@ type Bet struct {
 }
 
 // GetBet Odds with fixtureId
-func GetBet(fixturesID int) ([]Bet, error) {
+func git GetBet(fixturesID int) ([]Bet, error) {
 	uri := "odds/fixture/" + strconv.Itoa(fixturesID)
 
 	response, err := getAnythingArray(uri)
