@@ -14,14 +14,14 @@
   version = "v1.5.0"
 
 [[projects]]
-  branch = "master"
-  name = "github.com/mitchellh/mapstructure"
-  packages = ["."]
-  revision = "d0303fe809921458f417bcf828397a65db30a7e4"
+  branch = "sportmonks"
+  name = "github.com/tsauvajon/ws-blockchain"
+  packages = ["server/sportmonks"]
+  revision = "d7533b17838b8a84ed4cad40342d102db0e4b56f"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "9e46d2335e153433d2885c9b4dc6e34db67c1aebc8b5976b95b3fa037e929306"
+  inputs-digest = "4221d2326d44057bcdeba555f1c725f78d94669871a7c049f961d19a708ceb22"
   solver-name = "gps-cdcl"
   solver-version = 1

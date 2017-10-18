@@ -1,0 +1,39 @@
+/**
+ * Alphabets network definition.
+ */
+namespace world.alphabets
+
+/**
+ * User definition.
+ */
+participant User identified by userId {
+  
+ o String userId
+ o String userName
+ o String userPassword
+ o Integer wallet
+  
+}
+
+transaction setWallet {
+ -->User user2
+ o Integer newWallet
+}
+
+/**
+ * Bet definition.
+ */
+asset Bet identified by assetId {
+  --> User userId
+  o String assetId
+  o Integer eventId default = 0
+  o Integer choice default = 0
+  o Integer bet default = 0
+  o DateTime dateBet optional
+  o Boolean paid default = false
+}
+
+transaction setPaid {
+ -->Bet valuePaid
+ o Integer newPaidValue
+}
