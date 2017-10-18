@@ -41,7 +41,7 @@ export default {
     let fixturesAsync
 
     try {
-      fixturesAsync = api.soccer.getFixtures('2017-10-14', '2017-10-15')
+      fixturesAsync = api.soccer.getFixtures('2017-10-19', '2017-10-23')
     } catch (ex) {
       // The request failed. Handle failures
       return
