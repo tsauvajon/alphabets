@@ -88,6 +88,46 @@ func (app *App) getBetByFixture(w http.ResponseWriter, r *http.Request) {
 	respondWithJSON(w, 200, bet)
 }
 
+//getBetByFixture method return odds by fixture id
+func (app *App) getHighlightByFixture(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id, err := strconv.Atoi(vars["id"])
+	if err != nil {
+		respondWithJSON(w, 400, "Invalid fixture ID")
+		return
+	}
+
+	highlight, err := sportmonks.GetHighLight(id)
+
+	if err != nil {
+		fmt.Println(err)
+		respondWithJSON(w, 500, err)
+		return
+	}
+
+	respondWithJSON(w, 200, highlight)
+}
+
+// getStandingBySeasonId func called GetStanding func for get rank
+func (app *App) getStandingBySeasonId(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id, err := strconv.Atoi(vars["id"])
+	if err != nil {
+		respondWithJSON(w, 400, "Invalid fixture ID")
+		return
+	}
+
+	standing, err := sportmonks.GetStanding(id)
+
+	if err != nil {
+		fmt.Println(err)
+		respondWithJSON(w, 500, err)
+		return
+	}
+
+	respondWithJSON(w, 200, standing)
+}
+
 //calculteOdds return moy of all odds
 // func calculateOdds(bet sportmonks.Bet) Odds {
 

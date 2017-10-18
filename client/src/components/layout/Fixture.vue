@@ -11,25 +11,26 @@
           <span class="team-name accent--text">{{ home.name }}</span>
         </v-flex>
         <v-flex xs4>
-          <v-layout row wrap class="text-xs-center odds">
+          <v-layout v-if="odds" row wrap class="text-xs-center odds">
             <v-flex xs12>
               <v-btn class="bet" color="primary">
                 <v-icon left dark>chevron_left</v-icon>
-                <span>3.5</span>
+                <span>{{ odds.home.toFixed(2) }}</span>
               </v-btn>
             </v-flex><v-flex xs12>
               <v-btn class="bet" color="primary">
                 <v-icon left dark>remove</v-icon>
-                <span>3</span>
+                <span>{{ odds.draw.toFixed(2) }}</span>
               </v-btn>
             </v-flex>
             <v-flex xs12>
               <v-btn class="bet" color="primary">
                 <v-icon left dark>chevron_right</v-icon>
-                <span>1.2</span>
+                <span>{{ odds.away.toFixed(2) }}</span>
               </v-btn>
             </v-flex>
           </v-layout>
+          <v-progress-circular v-else style="margin: auto" :size="80" indeterminate color="primary"></v-progress-circular>
         </v-flex>
         <v-flex xs4 class="text-xs-center team" @click="$router.push(`teams/${away.id}`)" v-if="away">
           <img :src="away.logo_path" class="logo" />
@@ -38,17 +39,52 @@
       </v-layout>
     </div>
   </v-card-text>
-  <!-- <v-card-actions>
-    <v-spacer></v-spacer>
-    <v-btn flat color="primary">Infos</v-btn>
-    <v-btn flat color="accent">Bet</v-btn>
-  </v-card-actions> -->
+  <v-card-text>
+  </v-card-text>
 </v-card>
 </template>
 
 <script>
+import api from '@/helpers/url'
+
+const calculateOdds = (odds) => {
+  try {
+    const threeWayResult = odds.find(type => type.name === '3Way Result')
+
+    const result = threeWayResult.bookmaker.data.reduce((acc, val) => {
+      console.log(acc)
+      return {
+        home: parseInt(acc.home) + parseInt(val.odds.data[0].value),
+        away: parseInt(acc.away) + parseInt(val.odds.data[1].value),
+        draw: parseInt(acc.draw) + parseInt(val.odds.data[2].value)
+      }
+    }, {
+      home: 0,
+      away: 0,
+      draw: 0
+    })
+
+    return {
+      home: result.home / threeWayResult.bookmaker.data.length,
+      away: result.away / threeWayResult.bookmaker.data.length,
+      draw: result.draw / threeWayResult.bookmaker.data.length
+    }
+  } catch (e) {
+    // console.log('Impossible to calculate bets', e)
+    return {
+      home: 1,
+      away: 1,
+      draw: 1
+    }
+  }
+}
+
 export default {
   name: 'fixture',
+
+  data: () => ({
+    odds: null
+  }),
 
   computed: {
     home () {
@@ -68,7 +104,33 @@ export default {
     }
   },
 
-  props: ['fixture']
+  props: ['fixture'],
+
+  async created () {
+    if (!this.fixture) {
+      return
+    }
+
+    const { id } = this.fixture
+
+    let oddsAsync
+
+    try {
+      oddsAsync = api.soccer.getOddsByFixture(id)
+    } catch (ex) {
+      console.error(ex)
+      return
+    }
+
+    const odds = await oddsAsync
+
+    if (odds.status !== 200) {
+      // The request failed. Handle failures
+      return
+    }
+
+    this.odds = calculateOdds(odds.data)
+  }
 }
 </script>
 
