@@ -1,7 +1,7 @@
 <template>
 <v-card flat hover tile>
   <v-card-title>
-    <span class="date">2017/10/15 6pm</span>
+    <span class="date">{{ fixture.time.starting_at.date_time }}</span>
   </v-card-title>
   <v-card-text>
     <div class="fixture">
@@ -10,7 +10,7 @@
           <img :src="home.logo_path" class="logo" />
           <span class="team-name accent--text">{{ home.name }}</span>
         </v-flex>
-        <v-flex xs4>
+        <v-flex xs4 v-if="!results">
           <v-layout v-if="odds" row wrap class="text-xs-center odds">
             <v-flex xs12>
               <v-btn class="bet" color="primary">
@@ -32,6 +32,13 @@
           </v-layout>
           <v-progress-circular v-else style="margin: auto" :size="80" indeterminate color="primary"></v-progress-circular>
         </v-flex>
+        <v-flex xs4 v-else>
+          <div class="text-xs-center" style="margin-top: 65px;">
+            <span class="primary--text score-local">{{ fixture.scores.localteam_score }}</span>
+            <span class="primary--text score-separator">&nbsp;-&nbsp;</span>
+            <span class="primary--text score-visitor">{{ fixture.scores.visitorteam_score }}</span>
+          </div>
+        </v-flex>
         <v-flex xs4 class="text-xs-center team" @click="$router.push(`teams/${away.id}`)" v-if="away">
           <img :src="away.logo_path" class="logo" />
           <span class="team-name accent--text">{{ away.name }}</span>    
@@ -39,8 +46,10 @@
       </v-layout>
     </div>
   </v-card-text>
-  <v-card-text>
-  </v-card-text>
+  <v-card-actions v-if="results">
+    <v-spacer></v-spacer>
+    <v-btn large color="accent" flat :href="`/#/fixtures/${fixture.id}`"><v-icon left>airplay</v-icon>Video highlights</v-btn>
+  </v-card-actions>
 </v-card>
 </template>
 
@@ -52,7 +61,6 @@ const calculateOdds = (odds) => {
     const threeWayResult = odds.find(type => type.name === '3Way Result')
 
     const result = threeWayResult.bookmaker.data.reduce((acc, val) => {
-      console.log(acc)
       return {
         home: parseInt(acc.home) + parseInt(val.odds.data[0].value),
         away: parseInt(acc.away) + parseInt(val.odds.data[1].value),
@@ -104,7 +112,7 @@ export default {
     }
   },
 
-  props: ['fixture'],
+  props: ['fixture', 'results'],
 
   async created () {
     if (!this.fixture) {
@@ -112,6 +120,10 @@ export default {
     }
 
     const { id } = this.fixture
+
+    if (this.results) {
+      return
+    }
 
     let oddsAsync
 
@@ -173,5 +185,10 @@ export default {
   width: 30%;
   margin-left: auto;
   margin-right: auto;
+}
+
+.score-local, .score-visitor, .score-separator {
+  font-size: 3.5em;
+  font-family: 'Maven Pro', 'Helvetica','Arial', 'Roboto', sans-serif;
 }
 </style>

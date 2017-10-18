@@ -9,6 +9,7 @@ Vue.use(Vuex)
 const initialState = {
   drawer: false,
   fixtures: null,
+  results: null,
   teams: [],
   standings: null
 }
@@ -16,6 +17,7 @@ const initialState = {
 const getters = {
   drawer: ({ drawer }) => drawer,
   fixtures: ({ fixtures }) => fixtures,
+  results: ({ results }) => results,
   teams: ({ teams }) => teams,
   standings: ({ standings }) => standings
 }

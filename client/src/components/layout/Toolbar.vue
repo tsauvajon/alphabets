@@ -5,7 +5,7 @@
     <v-list>
       <v-list-tile>
         <v-list-tile-title class="white--text title">
-          AlphaBets
+          <span>AlphaBets</span>
         </v-list-tile-title>
       </v-list-tile>
     </v-list>
