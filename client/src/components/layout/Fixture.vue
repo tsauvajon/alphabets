@@ -1,7 +1,7 @@
 <template>
 <v-card flat hover tile>
   <v-card-title>
-    <span class="date">2017/10/15 6pm</span>
+    <span class="date">{{ fixture.time.starting_at.date_time }}</span>
   </v-card-title>
   <v-card-text>
     <div class="fixture">
@@ -33,7 +33,7 @@
           <v-progress-circular v-else style="margin: auto" :size="80" indeterminate color="primary"></v-progress-circular>
         </v-flex>
         <v-flex xs4 v-else>
-          <div class="text-xs-center">
+          <div class="text-xs-center" style="margin-top: 65px;">
             <span class="primary--text score-local">{{ fixture.scores.localteam_score }}</span>
             <span class="primary--text score-separator">&nbsp;-&nbsp;</span>
             <span class="primary--text score-visitor">{{ fixture.scores.visitorteam_score }}</span>
@@ -188,7 +188,7 @@ export default {
 }
 
 .score-local, .score-visitor, .score-separator {
-  font-size: 2.5em;
+  font-size: 3.5em;
   font-family: 'Maven Pro', 'Helvetica','Arial', 'Roboto', sans-serif;
 }
 </style>
