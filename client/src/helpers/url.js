@@ -20,7 +20,7 @@ const soccerFactory = (base) => ({
   getFixtures: getFixturesFactory(`${base}/${soccerPrefix}`),
   getOddsByFixture: getOddsByFixtureFactory(`${base}/${soccerPrefix}`),
   getStandingsBySeasonId: getStandingsBySeasonIdFactory(`${base}/${soccerPrefix}`),
-  getFixtureById: getFixtureById(`${base}/${soccerPrefix}`),
+  getFixtureById: getFixtureByIdFactory(`${base}/${soccerPrefix}`),
   getHighlightsByFixture: getHighlightsByFixtureFactory(`${base}/${soccerPrefix}`)
 })
 
