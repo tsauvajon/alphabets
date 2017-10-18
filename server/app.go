@@ -44,7 +44,7 @@ func (app *App) initializeRoutes() {
 	app.Router.HandleFunc("/", app.indexHandler).Methods("GET")
 
 	// Adds the /blockchain/ prefix for blockchain requests
-	blockchain := api.PathPrefix("/blockchain").Subrouter()
+	// TO DO : blockchain := api.PathPrefix("/blockchain").Subrouter()
 }
 
 func (app *App) indexHandler(w http.ResponseWriter, r *http.Request) {
