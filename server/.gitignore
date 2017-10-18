@@ -19,3 +19,6 @@ debug.*
 
 # Deps
 vendor/
+
+# Secrets
+sportmonks/secret.json

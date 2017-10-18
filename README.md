@@ -7,6 +7,11 @@ Chainblock applied to betting.
 
 Alpha for innovation - Bets for Betting => AlphaBets
 
+## SportMonks
+
+Special thanks to [SportMonks](https://sportmonks.com) for giving us access to the Ligue 1
+![SportMonks logo](https://www.sportmonks.com/images/logos/logo_black_top.png)
+
 ## Getting started
 
 ``` bash
@@ -31,13 +36,27 @@ dep ensure
 # Build the server
 go build
 
-# Set the environment variables
+# If your port 3333 is already used, set another
 # Unix / MacOS
 PORT=...
 # Windows
 SET PORT=...
+```
 
-# Run the server
+## Setup the SportMonks API Token
+Get an API Token on https://www.sportmonks.com/sports/soccer/documentation
+
+Either set the environment variable `API_TOKEN` before running the server,
+or create a `secret.json` file under the `server/sportmonks` directory:
+
+``` json
+{
+    "token": "your_token"
+}
+```
+
+## Run the server
+```
 # Unix / MacOS
 ./server
 # Windows
@@ -48,14 +67,16 @@ Browse http://localhost:{PORT}
 
 ## CI
 
-Node
+**Node**
 - lint avec ESLint
+
+- TODO : unit testing
 - tests unitaires avec Karma / Mocha / Sinon
 - build
 
-Go
-- TODO : lint
-- TODO : tests unitaires
+**Go**
+- lint : go lint
+- auto format : go fmt
 - build
 
 ## Deployment

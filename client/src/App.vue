@@ -1,16 +1,26 @@
 <template>
-<v-app id="app">
-    <main>
-      <v-content>
-        <router-view></router-view>
-      </v-content>
-    </main>
+<v-app>
+  <ab-toolbar></ab-toolbar>
+  <main>
+    <v-content>
+      <router-view></router-view>
+    </v-content>
+  </main>
+  <ab-footer></ab-footer>
 </v-app>
 </template>
 
 <script>
+import Toolbar from '@/components/layout/Toolbar'
+import ABFooter from '@/components/layout/ABFooter'
+
 export default {
-  name: 'app'
+  name: 'app',
+
+  components: {
+    'ab-toolbar': Toolbar,
+    'ab-footer': ABFooter
+  }
 }
 </script>
 
@@ -28,5 +38,9 @@ export default {
 
 strong {
   color: #C52B2B;
+}
+
+h1, h2, h3 {
+  font-family: 'Maven Pro', 'Helvetica','Arial', 'Roboto', sans-serif;
 }
 </style>
