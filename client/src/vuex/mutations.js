@@ -11,6 +11,15 @@ const SET_FIXTURES = (state, { fixtures }) => {
   })
 }
 
+const SET_RESULTS = (state, { results }) => {
+  state.results = results
+
+  state.results.forEach(result => {
+    ADD_TEAM(state, { team: result.LocalTeam })
+    ADD_TEAM(state, { team: result.VisitorTeam })
+  })
+}
+
 const ADD_TEAM = (state, { team }) => {
   const index = state.teams.findIndex(t => t.id === team.id)
 
@@ -26,7 +35,8 @@ const ADD_TEAM = (state, { team }) => {
 
 const mutations = {
   TOGGLE_DRAWER,
-  SET_FIXTURES
+  SET_FIXTURES,
+  SET_RESULTS
 }
 
 export default mutations

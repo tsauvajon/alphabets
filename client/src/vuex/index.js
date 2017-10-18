@@ -9,12 +9,14 @@ Vue.use(Vuex)
 const initialState = {
   drawer: false,
   fixtures: null,
+  results: null,
   teams: []
 }
 
 const getters = {
   drawer: ({ drawer }) => drawer,
   fixtures: ({ fixtures }) => fixtures,
+  results: ({ results }) => results,
   teams: ({ teams }) => teams
 }
 
