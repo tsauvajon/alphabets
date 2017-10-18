@@ -53,3 +53,32 @@ func GetTeam(teamID int) (Team, error) {
 
 	return team, nil
 }
+
+// GetTeamRoutine : Routine for concurrently getting teams
+func GetTeamRoutine(teamID int, teamChannel chan Team) {
+	uri := "teams/" + strconv.Itoa(teamID)
+
+	response, err := getAnything(uri)
+
+	if err != nil {
+		fmt.Println("Error getting the data: ", err)
+		return
+	}
+
+	var team Team
+
+	// Marshal the data part in order to decode it from JSON later
+	jsonEncodedTeam, err := json.Marshal(response.Data)
+
+	if err != nil {
+		fmt.Println("Error marshalling the team: ", err)
+		return
+	}
+
+	if err = json.Unmarshal(jsonEncodedTeam, &team); err != nil {
+		fmt.Println("Error unmarshalling the response data: ", err)
+		return
+	}
+
+	teamChannel <- team
+}

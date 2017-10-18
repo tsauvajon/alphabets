@@ -16,7 +16,7 @@ type Odds struct {
 	Away  float64 `json:"away"`
 }
 
-//getTeam method return Team
+// getTeam method return Team
 func (app *App) getTeamByID(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id, err := strconv.Atoi(vars["id"])
@@ -43,7 +43,7 @@ func (app *App) getTeamByID(w http.ResponseWriter, r *http.Request) {
 	respondWithJSON(w, 200, team)
 }
 
-//getFixtureByDate method return Fixture by date
+// getFixtureByDate method return Fixture by date
 func (app *App) getFixtureByDate(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	datedeb := vars["deb"]
@@ -58,7 +58,7 @@ func (app *App) getFixtureByDate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fixture, err := sportmonks.GetFixture(datedeb, datefin)
+	fixture, err := sportmonks.GetFixtures(datedeb, datefin)
 	if err != nil {
 		fmt.Println(err)
 		respondWithJSON(w, 500, err)
@@ -68,7 +68,7 @@ func (app *App) getFixtureByDate(w http.ResponseWriter, r *http.Request) {
 	respondWithJSON(w, 200, fixture)
 }
 
-//getBetByFixture method return odds by fixture id
+// getBetByFixture method return odds by fixture id
 func (app *App) getBetByFixture(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id, err := strconv.Atoi(vars["id"])
