@@ -107,7 +107,7 @@ export default {
   color: rgba(255, 255, 255, .8);
   text-align: center;
   
-  animation-delay: .8s;
+  animation-delay: 1.8s;
   animation-duration: 1.6s;
   animation-fill-mode: both;
   animation-name: fadeIn;
