@@ -51,9 +51,9 @@ func GetFixtures(deb, fin string) ([]Fixture, error) {
 		return []Fixture{}, fmt.Errorf("Error unmarshalling the response data: %v", err)
 	}
 
-	fixturesChan := make(chan Fixture, len(fixtures))
+	// fixturesChan := make(chan Fixture, len(fixtures))
 
-	go getTeams(fixtures, fixturesChan)
+	updatedFixtures := getTeams(fixtures)
 
 	// for _, fixture := range fixtures {
 	// hometeam, _ := GetTeam(fixture.LocalTeamID)
@@ -62,48 +62,62 @@ func GetFixtures(deb, fin string) ([]Fixture, error) {
 	// fixtures[i].VisitorTeam = visitorteam
 	// }
 
-	updatedFixtures := make([]Fixture, 0)
+	// updatedFixtures := make([]Fixture, 0)
 
 	// for i := 0; i < len(fixturesChan); i++ {
 	// 	updatedFixtures = append(updatedFixtures, i)
 	// }
 
-	for fixture := range fixturesChan {
-		updatedFixtures = append(updatedFixtures, fixture)
-		fmt.Println("-")
-	}
+	// for fixture := range fixturesChan {
+	// 	updatedFixtures = append(updatedFixtures, fixture)
+	// 	fmt.Println("-")
+	// }
 
 	fmt.Print("outside the for: ", updatedFixtures)
 
 	return updatedFixtures, nil
 }
 
-func getTeams(fixtures []Fixture, fixturesChan chan Fixture) {
+func getTeams(fixtures []Fixture) []Fixture {
 	var wg sync.WaitGroup
 	wg.Add(len(fixtures))
 
-	for _, fixture := range fixtures {
-		defer wg.Done()
-		// local := make(chan Team, 1)
-		// visitor := make(chan Team, 1)
+	fixturesChan := make(chan Fixture, len(fixtures))
+	for i, fixture := range fixtures {
+		go func(fixture Fixture) {
+			defer wg.Done()
+			// local := make(chan Team, 1)
+			// visitor := make(chan Team, 1)
 
-		local, err := GetTeam(fixture.LocalTeamID)
+			local, err := GetTeam(fixture.LocalTeamID)
 
-		if err != nil {
-			fmt.Println("Impossible to get local team for fixute ", fixture.ID)
-		}
+			if err != nil {
+				fmt.Println("Impossible to get local team for fixute ", fixture.ID)
+				return
+			}
 
-		visitor, err := GetTeam(fixture.VisitorTeamID)
+			visitor, err := GetTeam(fixture.VisitorTeamID)
 
-		if err != nil {
-			fmt.Println("Impossible to get visitor team for fixute ", fixture.ID)
-		}
+			if err != nil {
+				fmt.Println("Impossible to get visitor team for fixute ", fixture.ID)
+				return
+			}
 
-		fixture.LocalTeam = local
-		fixture.VisitorTeam = visitor
+			fixture.LocalTeam = local
+			fixture.VisitorTeam = visitor
 
-		fixturesChan <- fixture
+			// fixtures[i] = fixture
+			fixturesChan <- fixture
+		}(fixture)
+	}
+
+	updatedFixtures := make([]Fixture, 0)
+
+	for fixture := range fixturesChan {
+		updatedFixtures = append(updatedFixtures, fixture)
+		fmt.Println("-")
 	}
 
 	wg.Wait()
+	return updatedFixtures
 }
