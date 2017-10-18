@@ -31,7 +31,7 @@ type Fixture struct {
 	// TV            Response      `json:"tvstations"`
 }
 
-//GetFixture get Fixture with date deb and date fin
+// GetFixture get Fixture with date deb and date fin
 func GetFixture(deb, fin string) ([]Fixture, error) {
 	uri := "fixtures/between/" + deb + "/" + fin
 	response, err := getAnythingArray(uri)
@@ -53,7 +53,7 @@ func GetFixture(deb, fin string) ([]Fixture, error) {
 	for i, fixture := range fixtures {
 		hometeam, _ := GetTeam(fixture.LocalteamId)
 		visitorteam, _ := GetTeam(fixture.VisitorteamId)
-		GetBet(fixture.Id)
+		// GetBet(fixture.Id)
 		fixtures[i].LocalTeam = hometeam
 		fixtures[i].VisitorTeam = visitorteam
 	}
