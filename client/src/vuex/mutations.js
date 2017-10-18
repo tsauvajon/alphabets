@@ -24,9 +24,15 @@ const ADD_TEAM = (state, { team }) => {
   ]
 }
 
+const SET_STANDINGS = (state, { standings }) => {
+  state.standings = standings
+}
+
 const mutations = {
   TOGGLE_DRAWER,
-  SET_FIXTURES
+  SET_FIXTURES,
+  ADD_TEAM,
+  SET_STANDINGS
 }
 
 export default mutations
