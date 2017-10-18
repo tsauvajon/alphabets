@@ -97,7 +97,7 @@ func (app *App) getHighlightByFixture(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fixture, err := sportmonks.GetHighLight(id)
+	highlight, err := sportmonks.GetHighLight(id)
 
 	if err != nil {
 		fmt.Println(err)
@@ -105,7 +105,27 @@ func (app *App) getHighlightByFixture(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	respondWithJSON(w, 200, fixture)
+	respondWithJSON(w, 200, highlight)
+}
+
+// getStandingBySeasonId func called GetStanding func for get rank
+func (app *App) getStandingBySeasonId(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id, err := strconv.Atoi(vars["id"])
+	if err != nil {
+		respondWithJSON(w, 400, "Invalid fixture ID")
+		return
+	}
+
+	standing, err := sportmonks.GetStanding(id)
+
+	if err != nil {
+		fmt.Println(err)
+		respondWithJSON(w, 500, err)
+		return
+	}
+
+	respondWithJSON(w, 200, standing)
 }
 
 //calculteOdds return moy of all odds

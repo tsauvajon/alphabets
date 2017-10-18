@@ -21,7 +21,7 @@
     <v-list-tile href="#/results">
       <v-list-tile-title class="primary--text link">Results</v-list-tile-title>
     </v-list-tile>
-    <v-list-tile href="#/standings">
+    <v-list-tile href="#/standing/6405">
       <v-list-tile-title class="primary--text link">Standings</v-list-tile-title>
     </v-list-tile>
   </v-list>

@@ -10,14 +10,16 @@ const initialState = {
   drawer: false,
   fixtures: null,
   results: null,
-  teams: []
+  teams: [],
+  standings: null
 }
 
 const getters = {
   drawer: ({ drawer }) => drawer,
   fixtures: ({ fixtures }) => fixtures,
   results: ({ results }) => results,
-  teams: ({ teams }) => teams
+  teams: ({ teams }) => teams,
+  standings: ({ standings }) => standings
 }
 
 export default new Vuex.Store({
