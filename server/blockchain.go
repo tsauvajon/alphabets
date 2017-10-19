@@ -100,9 +100,10 @@ func (app *App) getBets(w http.ResponseWriter, r *http.Request) {
 
 func (app *App) getBetByID(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	id, err := strconv.Atoi(vars["id"])
-	if err != nil {
-		respondWithJSON(w, 400, "Invalid fixture ID")
+	id := vars["id"]
+
+	if id == "" {
+		respondWithJSON(w, 400, "Invalid ID")
 		return
 	}
 
@@ -110,7 +111,7 @@ func (app *App) getBetByID(w http.ResponseWriter, r *http.Request) {
 
 	if err != nil {
 		fmt.Println(err)
-		respondWithJSON(w, 500, err)
+		respondWithJSON(w, 404, err)
 		return
 	}
 

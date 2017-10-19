@@ -34,14 +34,7 @@ export default {
       this.$router.push('/')
     }
 
-    // let fixtureAsync
     let highlightsAsync
-
-    try {
-      // fixtureAsync = api.soccer.getFixtureById(id)
-    } catch (e) {
-      console.error(e)
-    }
 
     try {
       highlightsAsync = api.soccer.getHighlightsByFixture(id)
@@ -49,12 +42,8 @@ export default {
       console.error(e)
     }
 
-    // const fixture = await fixtureAsync
     const highlights = await highlightsAsync
 
-    console.log(highlights)
-
-    // this.fixture = fixture.data
     this.highlights = highlights.data
   }
 }

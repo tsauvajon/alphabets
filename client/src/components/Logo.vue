@@ -102,10 +102,12 @@ export default {
   width: 100%;
   background-color: #333333;
   transform-origin: 0.5 0;
+  text-align: left !important;
 }
 
 .ml5 .letters {
-  display: inline-block;
+  font-family : "Trebuchet MS", Helvetica, sans-serif !important;
+  display: relative !important;
   opacity: 0;
 }
 </style>

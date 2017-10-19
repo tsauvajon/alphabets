@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
-	"strconv"
 	"time"
 )
 
@@ -28,8 +27,8 @@ type Bet struct {
 }
 
 // GetBet : Retrieves a bet from the sportmonks API
-func GetBet(betID int) (Bet, error) {
-	uri := "world.alphabets.Bet/" + strconv.Itoa(betID)
+func GetBet(betID string) (Bet, error) {
+	uri := "world.alphabets.Bet/" + betID
 
 	response, err := getBcAnything(uri)
 
