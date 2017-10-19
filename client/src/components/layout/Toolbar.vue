@@ -36,7 +36,7 @@
 
   <v-footer fixed style="height: 100px;" flat class="accent">
     <div style="width: 100%; margin-left: auto; margin-right: auto; text-align: center">
-    <span style="font-size: 35px;" class="white--text">{{ wallet }} <img style="height: 35px; padding: 5px 0 0 5px; cursor: pointer;" src="../../assets/bet.white.svg"></span>
+    <span style="font-size: 40px;" class="white--text">{{ wallet }}<img style="height: 35px; padding: 5px 0 0 5px;" src="../../assets/bet.white.svg" /></span>
     </div>
   </v-footer>
 </v-navigation-drawer>

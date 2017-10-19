@@ -97,7 +97,7 @@ export default {
 
   async created () {
     const { saisonid } = this.$route.params
-    console.log(saisonid)
+
     if (!saisonid || saisonid === 0) {
       this.$router.push('/')
     }
@@ -107,7 +107,6 @@ export default {
     }
 
     let standingsAsync
-    console.log(api.soccer)
 
     try {
       standingsAsync = api.soccer.getStandingsBySeasonId(saisonid)
@@ -122,7 +121,7 @@ export default {
     if (standings.status !== 200) {
       return
     }
-    console.log(standings)
+
     this.$store.dispatch('setStandings', { standings: standings.data })
   }
 }

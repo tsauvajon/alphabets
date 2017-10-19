@@ -22,3 +22,6 @@ vendor/
 
 # Secrets
 sportmonks/secret.json
+
+# Builts files
+dist/

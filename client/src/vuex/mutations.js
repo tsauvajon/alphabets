@@ -37,6 +37,14 @@ const SET_STANDINGS = (state, { standings }) => {
   state.standings = standings
 }
 
+const SET_BETS = (state, { bets }) => {
+  state.bets = bets
+}
+
+const ADD_MONEY = (state, { amount }) => {
+  state.wallet = parseInt(state.wallet) + amount
+}
+
 const CONNECT = (state, { userName, userId, wallet }) => {
   state.connected = true
   state.username = userName
@@ -55,6 +63,8 @@ const mutations = {
   TOGGLE_DRAWER,
   SET_FIXTURES,
   SET_RESULTS,
+  SET_BETS,
+  ADD_MONEY,
   ADD_TEAM,
   SET_STANDINGS,
   CONNECT,

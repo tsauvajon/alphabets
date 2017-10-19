@@ -20,6 +20,14 @@ const setStandings = ({ commit }, { standings }) => {
   commit('SET_STANDINGS', { standings })
 }
 
+const setBets = ({ commit }, { bets }) => {
+  commit('SET_BETS', { bets })
+}
+
+const addMoney = ({ commit }, { amount }) => {
+  commit('ADD_MONEY', { amount: parseInt(amount) })
+}
+
 const connect = async ({ commit }, { username, password }) => {
   try {
     const resultAsync = api.blockchain.connect(username, password)
@@ -30,7 +38,6 @@ const connect = async ({ commit }, { username, password }) => {
       return false
     }
 
-    console.log(result.data)
     commit('CONNECT', { ...result.data })
     return true
   } catch (e) {
@@ -47,6 +54,8 @@ const actions = {
   setResults,
   addTeam,
   setStandings,
+  setBets,
+  addMoney,
   connect,
   disconnect
 }
