@@ -13,15 +13,9 @@
   revision = "24fca303ac6da784b9e8269f724ddeb0b2eea5e7"
   version = "v1.5.0"
 
-[[projects]]
-  branch = "sportmonks"
-  name = "github.com/tsauvajon/ws-blockchain"
-  packages = ["server/sportmonks"]
-  revision = "d7533b17838b8a84ed4cad40342d102db0e4b56f"
-
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "4221d2326d44057bcdeba555f1c725f78d94669871a7c049f961d19a708ceb22"
+  inputs-digest = "11130969cb0149a105d78f30213e9329cfb4ace667952be38da5f8a9c8afa0f9"
   solver-name = "gps-cdcl"
   solver-version = 1
