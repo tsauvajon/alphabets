@@ -1,12 +1,20 @@
 <template>
 <div>
 <v-navigation-drawer v-model="drawer" temporary light>
-  <v-toolbar color="accent" flat>
+  <v-toolbar extended color="accent" flat>
     <v-list>
       <v-list-tile>
         <v-list-tile-title class="white--text title">
           <span>AlphaBets</span>
         </v-list-tile-title>
+      </v-list-tile>
+      <v-list-tile>
+        <v-list-tile-title class="white--text">
+          <span style="font-weight: 700">{{ username }}</span>
+        </v-list-tile-title>
+        <v-list-tile-action @click="$store.dispatch('disconnect')">
+          <v-btn flat icon><v-icon color="white">exit_to_app</v-icon></v-btn>
+        </v-list-tile-action>
       </v-list-tile>
     </v-list>
   </v-toolbar>
@@ -25,6 +33,12 @@
       <v-list-tile-title class="primary--text link">Standings</v-list-tile-title>
     </v-list-tile>
   </v-list>
+
+  <v-footer fixed style="height: 100px;" flat class="accent">
+    <div style="width: 100%; margin-left: auto; margin-right: auto; text-align: center">
+    <span style="font-size: 35px;" class="white--text">{{ wallet }} <img style="height: 35px; padding: 5px 0 0 5px; cursor: pointer;" src="../../assets/bet.white.svg"></span>
+    </div>
+  </v-footer>
 </v-navigation-drawer>
 <v-toolbar dense color="transparent" class="elevation-0 abtoolbar">
   <v-toolbar-title @click="drawer = !drawer" app>
@@ -46,6 +60,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 import Logo from '@/components/Logo'
 
 export default {
@@ -54,6 +70,8 @@ export default {
   components: {
     Logo
   },
+
+  computed: mapGetters(['wallet', 'username']),
 
   data: () => ({
     drawer: false

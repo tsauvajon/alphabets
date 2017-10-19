@@ -1,6 +1,6 @@
 <template>
 <v-footer app>
-<span class="accent--text">AlphaBets</span>
+<span class="accent--text">AlphaBets - Innovative betting using the Blockchain</span>
 </v-footer>
 </template>
 

@@ -109,7 +109,7 @@ func (app *App) getHighlightByFixture(w http.ResponseWriter, r *http.Request) {
 }
 
 // getStandingBySeasonId func called GetStanding func for get rank
-func (app *App) getStandingBySeasonId(w http.ResponseWriter, r *http.Request) {
+func (app *App) getStandingBySeasonID(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id, err := strconv.Atoi(vars["id"])
 	if err != nil {
