@@ -17,6 +17,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import moment from 'moment'
 
 import Fixture from '@/components/layout/Fixture'
 import Logo from '@/components/Logo'
@@ -41,9 +42,13 @@ export default {
     let resultsAsync
 
     try {
-      resultsAsync = api.soccer.getFixtures('2017-10-14', '2017-10-15')
+      const startDate = moment().subtract(6, 'days').format('YYYY-MM-DD')
+      const endDate = moment().format('YYYY-MM-DD')
+
+      resultsAsync = api.soccer.getFixtures(startDate, endDate)
     } catch (ex) {
       // The request failed. Handle failures
+      console.error(ex)
       return
     }
 
