@@ -7,6 +7,9 @@
         <v-list-tile-title class="white--text title">
           <span>AlphaBets</span>
         </v-list-tile-title>
+        <v-list-tile-action>
+          <v-btn flat icon @click="$store.dispatch('disconnect')"><v-icon color="white">exit_to_app</v-icon></v-btn>
+        </v-list-tile-action>
       </v-list-tile>
     </v-list>
   </v-toolbar>

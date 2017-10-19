@@ -37,12 +37,26 @@ const SET_STANDINGS = (state, { standings }) => {
   state.standings = standings
 }
 
+const CONNECT = (state, { username, id }) => {
+  state.connected = true
+  state.username = username
+  state.id = id
+}
+
+const DISCONNECT = (state) => {
+  state.connected = false
+  state.username = null
+  state.id = null
+}
+
 const mutations = {
   TOGGLE_DRAWER,
   SET_FIXTURES,
   SET_RESULTS,
   ADD_TEAM,
-  SET_STANDINGS
+  SET_STANDINGS,
+  CONNECT,
+  DISCONNECT
 }
 
 export default mutations

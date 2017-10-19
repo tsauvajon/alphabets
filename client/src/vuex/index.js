@@ -11,7 +11,10 @@ const initialState = {
   fixtures: null,
   results: null,
   teams: [],
-  standings: null
+  standings: null,
+  id: null,
+  username: null,
+  connected: false
 }
 
 const getters = {
@@ -19,7 +22,10 @@ const getters = {
   fixtures: ({ fixtures }) => fixtures,
   results: ({ results }) => results,
   teams: ({ teams }) => teams,
-  standings: ({ standings }) => standings
+  standings: ({ standings }) => standings,
+  connected: ({ connected }) => connected,
+  username: ({ username }) => username,
+  id: ({ id }) => id
 }
 
 export default new Vuex.Store({

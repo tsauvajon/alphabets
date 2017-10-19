@@ -11,12 +11,16 @@
         <h3 class="alphabets">AlphaBets</h3>
       </v-card-text>
       <v-card-text>
-        <v-text-field @keyup.enter="console.log()" dark label="Login"></v-text-field><br>
-        <v-text-field @keyup.enter="console.log()" type="password" dark label="Mot de passe"></v-text-field>
+        <v-text-field :rules="[() => !failed || 'Incorrect login or password']" @keyup.enter="connect" v-model="username" required dark label="Login"></v-text-field><br>
+        <v-text-field @keyup.enter="connect" v-model="password" required type="password" dark label="Password"></v-text-field>
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn href="#/" flat dark>Connexion<v-icon right>chevron_right</v-icon></v-btn>
+        <v-btn @click="connect" flat dark>
+          <span>Connexion</span>
+          <v-icon v-if="!connecting" right>chevron_right</v-icon>
+          <v-progress-circular indeterminate style="margin-left: 5px" v-else color="white"></v-progress-circular>
+        </v-btn>
       </v-card-actions>
     </v-card>
     <div style="height: 300px"></div>
@@ -40,7 +44,13 @@ export default {
     SmallerLogo
   },
 
-  data: () => ({ logo: true }),
+  data: () => ({
+    logo: true,
+    username: null,
+    password: null,
+    failed: false,
+    connecting: false
+  }),
 
   computed: {
     backgroundUrl () {
@@ -58,6 +68,26 @@ export default {
 
     changeBackground () {
       rand = Math.floor(Math.random() * backgrounds.length)
+    },
+
+    async connect () {
+      if (!this.username) {
+        return
+      }
+
+      if (!this.password) {
+        return
+      }
+
+      this.connecting = true
+
+      const success = await this.$store.dispatch('connect', {
+        username: this.username,
+        password: this.password
+      })
+
+      this.connecting = false
+      this.failed = !success
     }
   },
 
