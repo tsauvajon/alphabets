@@ -37,16 +37,18 @@ const SET_STANDINGS = (state, { standings }) => {
   state.standings = standings
 }
 
-const CONNECT = (state, { username, id }) => {
+const CONNECT = (state, { userName, userId, wallet }) => {
   state.connected = true
-  state.username = username
-  state.id = id
+  state.username = userName
+  state.id = userId
+  state.wallet = wallet
 }
 
 const DISCONNECT = (state) => {
   state.connected = false
   state.username = null
   state.id = null
+  state.wallet = null
 }
 
 const mutations = {

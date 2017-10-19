@@ -26,8 +26,6 @@ func (app *App) connect(w http.ResponseWriter, r *http.Request) {
 
 	user, err := blockchain.ConnectUser(username, password)
 
-	fmt.Println(user, err)
-
 	if err != nil {
 		fmt.Println(err)
 		respondWithJSON(w, 401, err)
@@ -50,9 +48,7 @@ func (app *App) getUsers(w http.ResponseWriter, r *http.Request) {
 	respondWithJSON(w, 200, user)
 }
 
-
-// getUserById
-func (app *App) getUserById(w http.ResponseWriter, r *http.Request) {
+func (app *App) getUserByID(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id, err := strconv.Atoi(vars["id"])
 	if err != nil {
@@ -71,8 +67,7 @@ func (app *App) getUserById(w http.ResponseWriter, r *http.Request) {
 	respondWithJSON(w, 200, standing)
 }
 
-// getBets
-func (app *App) getBetsByIdUser(w http.ResponseWriter, r *http.Request) {
+func (app *App) getBetsByUserID(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	var idUser = vars["idUser"]
 	if idUser == "" {
@@ -80,7 +75,7 @@ func (app *App) getBetsByIdUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	user, err := blockchain.GetBetsByIdUser(idUser)
+	user, err := blockchain.GetBetsByUserID(idUser)
 
 	if err != nil {
 		fmt.Println(err)
@@ -91,7 +86,6 @@ func (app *App) getBetsByIdUser(w http.ResponseWriter, r *http.Request) {
 	respondWithJSON(w, 200, user)
 }
 
-// getBets
 func (app *App) getBets(w http.ResponseWriter, r *http.Request) {
 	user, err := blockchain.GetBets()
 
@@ -104,8 +98,7 @@ func (app *App) getBets(w http.ResponseWriter, r *http.Request) {
 	respondWithJSON(w, 200, user)
 }
 
-// getBetById
-func (app *App) getBetById(w http.ResponseWriter, r *http.Request) {
+func (app *App) getBetByID(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id, err := strconv.Atoi(vars["id"])
 	if err != nil {

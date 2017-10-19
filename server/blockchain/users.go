@@ -3,52 +3,54 @@ package blockchain
 import (
 	"encoding/json"
 	"fmt"
-	"strconv"
 	"io/ioutil"
 	"net/http"
+	"strconv"
 	//TO DO later : "golang.org/x/crypto/bcrypt"
 )
 
 // User : équipe
 type User struct {
-	// userId
+	// ID : identifier
 	ID string `json:"userId"`
-	// userName
+	// UserName : login
 	UserName string `json:"userName"`
-	// userPassword
+	// UserPassword: password
 	UserPassword string `json:"userPassword"`
+	// Wallet : amount of coins
+	Wallet int `json:"wallet"`
 }
 
-// ConnectUser
+// ConnectUser : Returns the user corresponding to the username / password combo
+// or returns an error
 func ConnectUser(username, password string) (User, error) {
 	var usrs []User
 	usrs, err := GetUsers()
-	if err != nil {
-		return User{}, fmt.Errorf("Error getting users", err)
-	}
-	for _, user := range usrs {
-		fmt.Println(user)
-		fmt.Println(usrs)
-		if(user.UserName == username){
-			// TO DO later : hashedPassword, err := bcrypt.GenerateFromPassword(, bcrypt.DefaultCost)
-		    //if err != nil {
-		    //    return false,fmt.Errorf("Error generate hash password", err)
-		    //}
 
-		    // Comparing the password with the hash
-		    // TO DO later : err = bcrypt.CompareHashAndPassword([]byte(user.userPassword), []byte(password))
-		    
-		    if user.UserPassword != password {
-		    	return User{}, fmt.Errorf("Error wrong password")
-		    }
-		    return user, nil
+	if err != nil {
+		return User{}, fmt.Errorf("Error getting users: %v", err)
+	}
+
+	for _, user := range usrs {
+		if user.UserName == username {
+			// TO DO later : hashedPassword, err := bcrypt.GenerateFromPassword(, bcrypt.DefaultCost)
+			//if err != nil {
+			//    return false,fmt.Errorf("Error generate hash password", err)
+			//}
+
+			// Comparing the password with the hash
+			// TO DO later : err = bcrypt.CompareHashAndPassword([]byte(user.userPassword), []byte(password))
+
+			if user.UserPassword != password {
+				return User{}, fmt.Errorf("Error: wrong password")
+			}
+			return user, nil
 		}
 	}
-	return User{}, fmt.Errorf("User not found")
+	return User{}, fmt.Errorf("Error: user not found")
 }
 
-
-// GetUsers
+// GetUsers : Gets all the users from the Blockchain
 func GetUsers() ([]User, error) {
 	client := &http.Client{}
 	uri := "world.alphabets.User"
@@ -83,13 +85,12 @@ func GetUsers() ([]User, error) {
 		return []User{}, fmt.Errorf("Error unmarshalling the response data: %v", err)
 	}
 
-	fmt.Println(users, string(body))
 	return users, nil
 }
 
-// GetUser : retrieves a user from the sportmonks API
-func GetUser(userId int) (User, error) {
-	uri := "world.alphabets.User/" + strconv.Itoa(userId)
+// GetUser : Retrieves a user from the blockchain (doesn't work)
+func GetUser(userID int) (User, error) {
+	uri := "world.alphabets.User/" + strconv.Itoa(userID)
 
 	response, err := getBcAnything(uri)
 

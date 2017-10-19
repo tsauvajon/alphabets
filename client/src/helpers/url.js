@@ -13,7 +13,7 @@ const getOddsByFixtureFactory = (base) => (id) => axios.get(`${base}/odds/fixtur
 const getHighlightsByFixtureFactory = (base) => (id) => axios.get(`${base}/highlights/fixture/${id}`)
 const getStandingsBySeasonIdFactory = (base) => (id) => axios.get(`${base}/standings/season/live/${id}`)
 
-const connect = (base) => (username, password) => axios.get(`${base}/connect?username=${username}&password=${password}`)
+const connect = (base) => (username, password) => axios.get(`${base}/connect/${username}/${password}`)
 
 const soccerFactory = (base) => ({
   getTeamById: getTeamByIdFactory(`${base}/${soccerPrefix}`),

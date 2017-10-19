@@ -11,8 +11,11 @@
         <h3 class="alphabets">AlphaBets</h3>
       </v-card-text>
       <v-card-text>
-        <v-text-field :rules="[() => !failed || 'Incorrect login or password']" @keyup.enter="connect" v-model="username" required dark label="Login"></v-text-field><br>
-        <v-text-field @keyup.enter="connect" v-model="password" required type="password" dark label="Password"></v-text-field>
+        <v-text-field @keyup.enter="connect" v-model="username" dark label="Login"></v-text-field><br>
+        <v-text-field @keyup.enter="connect" v-model="password" type="password" dark label="Password"></v-text-field>
+      </v-card-text>
+      <v-card-text v-if="failed">
+        <span class="white--text">Connection failed. Invalid login or password.</span>
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
@@ -93,6 +96,7 @@ export default {
 
   created () {
     this.changeBackground()
+    this.failed = false
   }
 }
 </script>

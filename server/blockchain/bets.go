@@ -3,34 +3,33 @@ package blockchain
 import (
 	"encoding/json"
 	"fmt"
-	"strconv"
-	"time"
 	"io/ioutil"
 	"net/http"
+	"strconv"
+	"time"
 )
 
-// Bet
+// Bet : Bet
 type Bet struct {
 	// assetId of bet
-	assetId string `json:"assetId"`
-	// userId 
-	userId string `json:"userId"`
+	AssetID string `json:"assetId"`
+	// userId
+	UserID string `json:"userId"`
 	// eventId
-	eventId int `json:"eventId"`
+	EventID int `json:"eventId"`
 	// choice
-	choice int `json:"choice"`
-	// bet 
-	bet int `json:"bet"`
-	// dateBet 
-	dateBet time.Time `json:"dateBet"`
+	Choice int `json:"choice"`
+	// bet
+	Bet int `json:"bet"`
+	// dateBet
+	DateBet time.Time `json:"dateBet"`
 	// paid
-	paid bool `json:"paid"`
+	Paid bool `json:"paid"`
 }
 
-
-// GetBet : retrieves a bet from the sportmonks API
-func GetBet(betId int) (Bet, error) {
-	uri := "world.alphabets.Bet/" + strconv.Itoa(betId)
+// GetBet : Retrieves a bet from the sportmonks API
+func GetBet(betID int) (Bet, error) {
+	uri := "world.alphabets.Bet/" + strconv.Itoa(betID)
 
 	response, err := getBcAnything(uri)
 
@@ -54,7 +53,7 @@ func GetBet(betId int) (Bet, error) {
 	return bet, nil
 }
 
-// GetBets
+// GetBets : Get all the bets
 func GetBets() ([]Bet, error) {
 	client := &http.Client{}
 	uri := "world.alphabets.Bet"
@@ -92,18 +91,18 @@ func GetBets() ([]Bet, error) {
 	return bets, nil
 }
 
-// GetBets idUser => "userId:9230"
-func GetBetsByIdUser(idUser string) ([]Bet, error) {
-	betsFiltered := make([]Bet, 0) 
+// GetBetsByUserID : idUser => "userId:9230"
+func GetBetsByUserID(idUser string) ([]Bet, error) {
+	betsFiltered := make([]Bet, 0)
 
 	var bets []Bet
 	bets, err := GetBets()
-	if err != nil{
-		return []Bet{}, fmt.Errorf("Error getting Bets:", err)
+	if err != nil {
+		return []Bet{}, fmt.Errorf("Error getting Bets: %v", err)
 	}
 
 	for _, bt := range bets {
-		if(bt.userId == idUser){
+		if bt.UserID == idUser {
 			betsFiltered = append(betsFiltered, bt)
 		}
 	}

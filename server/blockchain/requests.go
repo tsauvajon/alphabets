@@ -7,7 +7,6 @@ import (
 	"net/http"
 )
 
-
 // Response : SportMonks soccer API response
 type Response struct {
 	// Data : string
@@ -16,6 +15,7 @@ type Response struct {
 	Meta map[string]interface{} `json:"meta"`
 }
 
+// ArrayResponse : Useless
 type ArrayResponse struct {
 	Data []map[string]interface{} `json:"data"`
 	// Number
@@ -23,7 +23,7 @@ type ArrayResponse struct {
 }
 
 var (
-	apiURI      = "http://alpha-bets.world:3000/api/"
+	apiURI = "http://alpha-bets.world:3000/api/"
 )
 
 func getBcAnything(endpointWithParameters string) (Response, error) {
@@ -111,7 +111,7 @@ func postBcAnything(endpointWithParameters string, strings []string) (Response, 
 	url := apiURI + endpointWithParameters
 
 	// Prepare the request
-	req, err := http.NewRequest("POST", url,  nil)// strings.NewReader(r.Encode())
+	req, err := http.NewRequest("POST", url, nil) // strings.NewReader(r.Encode())
 
 	if err != nil {
 		return Response{}, fmt.Errorf("Error creating the request: %v", err)

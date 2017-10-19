@@ -14,6 +14,7 @@ const initialState = {
   standings: null,
   id: null,
   username: null,
+  wallet: null,
   connected: false
 }
 
@@ -25,7 +26,8 @@ const getters = {
   standings: ({ standings }) => standings,
   connected: ({ connected }) => connected,
   username: ({ username }) => username,
-  id: ({ id }) => id
+  id: ({ id }) => id,
+  wallet: ({ wallet }) => wallet
 }
 
 export default new Vuex.Store({

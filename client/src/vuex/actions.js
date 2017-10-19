@@ -30,7 +30,8 @@ const connect = async ({ commit }, { username, password }) => {
       return false
     }
 
-    commit('CONNECT', { username, id: result.data.userId })
+    console.log(result.data)
+    commit('CONNECT', { ...result.data })
     return true
   } catch (e) {
     console.error(e)
