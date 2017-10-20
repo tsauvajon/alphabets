@@ -50,6 +50,7 @@ func (app *App) initializeRoutes() {
 	blockchain.HandleFunc("/users", app.getUsers).Methods("GET")
 	blockchain.HandleFunc("/users/{id:[0-9]+}", app.getUserByID).Methods("GET")
 	blockchain.HandleFunc("/bets", app.getBets).Methods("GET")
+	blockchain.HandleFunc("/bets", app.createBet).Methods("POST")
 	blockchain.HandleFunc("/bets/{id}", app.getBetByID).Methods("GET")
 	blockchain.HandleFunc("/bets/user/{idUser}", app.getBetsByUserID).Methods("GET")
 

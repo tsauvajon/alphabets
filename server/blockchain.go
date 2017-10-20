@@ -117,3 +117,38 @@ func (app *App) getBetByID(w http.ResponseWriter, r *http.Request) {
 
 	respondWithJSON(w, 200, standing)
 }
+
+func (app *App) createBet(w http.ResponseWriter, r *http.Request) {
+
+	var userID = r.FormValue("userID")
+	if userID == "" {
+		respondWithJSON(w, 400, "Invalid empty userID")
+		return
+	}
+
+	amount, err := strconv.Atoi(r.FormValue("amount"))
+	if err != nil {
+		respondWithJSON(w, 400, "Invalid empty ID")
+		return
+	}
+	eventID, err := strconv.Atoi(r.FormValue("eventID"))
+	if err != nil {
+		respondWithJSON(w, 400, "Invalid empty ID")
+		return
+	}
+	choice, err := strconv.Atoi(r.FormValue("choice"))
+	if err != nil {
+		respondWithJSON(w, 400, "Invalid empty ID")
+		return
+	}
+
+	user, err := blockchain.CreateBet(userID, amount, eventID, choice)
+
+	if err != nil {
+		fmt.Println(err)
+		respondWithJSON(w, 500, err)
+		return
+	}
+
+	respondWithJSON(w, 200, user)
+}
