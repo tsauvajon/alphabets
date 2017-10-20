@@ -1,7 +1,10 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"io"
+	"log"
 	"net/http"
 	"strconv"
 
@@ -118,38 +121,35 @@ func (app *App) getBetByID(w http.ResponseWriter, r *http.Request) {
 	respondWithJSON(w, 200, standing)
 }
 
+// NewBet : place a new bet model
+type NewBet struct {
+	UserID  string `json:"userID"`
+	EventID int    `json:"fixtureID"`
+	Amount  int    `json:"amount"`
+	Choice  int    `json:"choice"`
+}
+
 func (app *App) createBet(w http.ResponseWriter, r *http.Request) {
-	var userID = r.FormValue("userID")
-	if userID == "" {
-		respondWithJSON(w, 400, "Invalid empty userID")
-		return
+	dec := json.NewDecoder(r.Body)
+
+	var newBet NewBet
+	for {
+		if err := dec.Decode(&newBet); err == io.EOF {
+			break
+		} else if err != nil {
+			log.Fatal(err)
+		}
+
+		fmt.Printf("%v\n", newBet)
 	}
 
-	amount, err := strconv.Atoi(r.FormValue("amount"))
-	if err != nil {
-		respondWithJSON(w, 400, "Invalid empty ID")
-		return
-	}
-	eventID, err := strconv.Atoi(r.FormValue("eventID"))
-	if err != nil {
-		respondWithJSON(w, 400, "Invalid empty ID")
-		return
-	}
-	choice, err := strconv.Atoi(r.FormValue("choice"))
-	if err != nil {
-		respondWithJSON(w, 400, "Invalid empty ID")
-		return
-	}
-
-	bet, err := blockchain.CreateBet(userID, amount, eventID, choice)
+	bet, err := blockchain.CreateBet(newBet.UserID, newBet.Amount, newBet.EventID, newBet.Choice)
 
 	if err != nil {
 		fmt.Println(err)
 		respondWithJSON(w, 500, err)
 		return
 	}
-
-	fmt.Println(bet)
 
 	respondWithJSON(w, 201, bet)
 }
