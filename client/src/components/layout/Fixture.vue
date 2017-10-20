@@ -171,14 +171,19 @@ export default {
 
       this.dialog = false
 
-      api.blockchain.postBet({
-        userID: this.id,
-        amount: this.amount,
-        fixtureID: this.fixture.id,
-        choice: this.choice
-      })
+      try {
+        api.blockchain.postBet({
+          userID: this.id,
+          amount: this.amount,
+          fixtureID: this.fixture.id,
+          choice: this.choice
+        })
 
-      this.$store.dispatch('addMoney', { amount: -this.amount })
+        this.$store.dispatch('addMoney', { amount: -this.amount })
+      } catch(e) {
+        console.error(e)
+        // Display that the bet wasn't placed
+      }
     }
   },
 
