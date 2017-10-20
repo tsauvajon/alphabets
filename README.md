@@ -81,4 +81,14 @@ Browse http://localhost:{PORT}
 
 ## Deployment
 
-TODO
+Requires Docker to be installed and running
+
+``` bash
+cd client
+yarn
+yarn build
+
+cd ../server
+docker build -t alphabets .
+docker run --publish 3333:3333 --name alphabets --rm alphabets
+```
