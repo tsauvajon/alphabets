@@ -79,6 +79,10 @@ Browse http://localhost:{PORT}
 - auto format : go fmt
 - build
 
+**Travis**
+
+Travis automatically runs tests and builds evrey push and pull request to every branch
+
 ## Deployment
 
 Requires Docker to be installed and running
