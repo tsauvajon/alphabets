@@ -116,7 +116,7 @@ export default {
   }),
 
   computed: {
-    ...mapGetters(['wallet']),
+    ...mapGetters(['wallet', 'id']),
 
     home () {
       if (!this.fixture) {
@@ -170,6 +170,13 @@ export default {
       }
 
       this.dialog = false
+
+      api.blockchain.postBet({
+        userID: this.id,
+        amount: this.amount,
+        fixtureID: this.fixture.id,
+        choice: this.choice
+      })
 
       this.$store.dispatch('addMoney', { amount: -this.amount })
     }
