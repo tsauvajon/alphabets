@@ -22,7 +22,7 @@ func respondWithJSON(w http.ResponseWriter, code int, payload interface{}) {
 
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Methods", "GET, POST")
+	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
 
 	w.WriteHeader(code)
 	w.Write(response)
@@ -50,6 +50,7 @@ func (app *App) initializeRoutes() {
 	blockchain.HandleFunc("/users", app.getUsers).Methods("GET")
 	blockchain.HandleFunc("/users/{id:[0-9]+}", app.getUserByID).Methods("GET")
 	blockchain.HandleFunc("/bets", app.getBets).Methods("GET")
+	blockchain.HandleFunc("/bets", app.createBet).Methods("POST")
 	blockchain.HandleFunc("/bets/{id}", app.getBetByID).Methods("GET")
 	blockchain.HandleFunc("/bets/user/{idUser}", app.getBetsByUserID).Methods("GET")
 
