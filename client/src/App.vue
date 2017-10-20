@@ -8,8 +8,8 @@
         <router-view></router-view>
       </v-content>
     </main>
-    <ab-footer></ab-footer>
   </template>
+  <ab-footer></ab-footer>
 </v-app>
 </template>
 

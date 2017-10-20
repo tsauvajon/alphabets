@@ -13,7 +13,9 @@ const getOddsByFixtureFactory = (base) => (id) => axios.get(`${base}/odds/fixtur
 const getHighlightsByFixtureFactory = (base) => (id) => axios.get(`${base}/highlights/fixture/${id}`)
 const getStandingsBySeasonIdFactory = (base) => (id) => axios.get(`${base}/standings/season/live/${id}`)
 
-const connect = (base) => (username, password) => axios.get(`${base}/connect/${username}/${password}`)
+const connectFactory = (base) => (username, password) => axios.get(`${base}/connect/${username}/${password}`)
+const getBetsFactory = (base) => () => axios.get(`${base}/bets`)
+const postBetFactory = (base) => ({ userID, amount, fixtureID, choice }) => axios.post(`${base}/bets`, { userID, amount, fixtureID, choice })
 
 const soccerFactory = (base) => ({
   getTeamById: getTeamByIdFactory(`${base}/${soccerPrefix}`),
@@ -25,7 +27,9 @@ const soccerFactory = (base) => ({
 })
 
 const blockchainFactory = (base) => ({
-  connect: connect(`${base}/${blockchainPrefix}`)
+  connect: connectFactory(`${base}/${blockchainPrefix}`),
+  getBets: getBetsFactory(`${base}/${blockchainPrefix}`),
+  postBet: postBetFactory(`${base}/${blockchainPrefix}`)
 })
 
 const api = (baseUrl) => ({

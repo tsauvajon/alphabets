@@ -1,6 +1,9 @@
 package blockchain
 
 import (
+	"bytes"
+	"crypto/rand"
+	"encoding/binary"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -28,8 +31,8 @@ type Bet struct {
 }
 
 // GetBet : Retrieves a bet from the sportmonks API
-func GetBet(betID int) (Bet, error) {
-	uri := "world.alphabets.Bet/" + strconv.Itoa(betID)
+func GetBet(betID string) (Bet, error) {
+	uri := "world.alphabets.Bet/" + betID
 
 	response, err := getBcAnything(uri)
 
@@ -108,4 +111,57 @@ func GetBetsByUserID(idUser string) ([]Bet, error) {
 	}
 
 	return bets, nil
+}
+
+// CreateBet : idUser => "userId:9230"
+func CreateBet(userID string, amount int, eventID int, choice int) (Response, error) {
+	client := &http.Client{}
+	uri := "world.alphabets.Bet"
+
+	url := apiURI + uri
+
+	var bet = Bet{"assetId:" + strconv.Itoa(eventID+Random()), userID, eventID, choice, amount, time.Now(), false}
+	b, err := json.Marshal(bet)
+	if err != nil {
+		return Response{}, fmt.Errorf("Error creating the request: %v", err)
+	}
+
+	// Prepare the request
+	req, err := http.NewRequest("POST", url, bytes.NewBuffer(b)) // strings.NewReader(r.Encode())
+
+	if err != nil {
+		return Response{}, fmt.Errorf("Error creating the request: %v", err)
+	}
+
+	// Execute the request
+	res, err := client.Do(req)
+
+	if err != nil {
+		return Response{}, fmt.Errorf("Error executing the request: %v", err)
+	}
+
+	defer res.Body.Close()
+
+	var response Response
+
+	// Read the response
+	body, err := ioutil.ReadAll(res.Body)
+
+	if err != nil {
+		return Response{}, fmt.Errorf("Error reading the response body: %v", err)
+	}
+
+	// Unmarshal the response : { data: { ... }, meta: { ... }}
+	if err = json.Unmarshal(body, &response); err != nil {
+		return Response{}, fmt.Errorf("Error unmarshalling the response: %v", err)
+	}
+
+	return response, nil
+}
+
+// Random : get a random int
+func Random() int {
+	var n int
+	binary.Read(rand.Reader, binary.LittleEndian, &n)
+	return n
 }

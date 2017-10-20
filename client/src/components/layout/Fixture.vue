@@ -1,4 +1,5 @@
 <template>
+<div>
 <v-card flat hover tile>
   <v-card-title>
     <span class="date">{{ fixture.time.starting_at.date_time }}</span>
@@ -13,18 +14,18 @@
         <v-flex xs4 v-if="!results">
           <v-layout v-if="odds" row wrap class="text-xs-center odds">
             <v-flex xs12>
-              <v-btn class="bet" color="primary">
+              <v-btn @click.stop="betHome" class="bet" color="primary">
                 <v-icon left dark>chevron_left</v-icon>
                 <span>{{ odds.home.toFixed(2) }}</span>
               </v-btn>
             </v-flex><v-flex xs12>
-              <v-btn class="bet" color="primary">
+              <v-btn @click.stop="betDraw" class="bet" color="primary">
                 <v-icon left dark>remove</v-icon>
                 <span>{{ odds.draw.toFixed(2) }}</span>
               </v-btn>
             </v-flex>
             <v-flex xs12>
-              <v-btn class="bet" color="primary">
+              <v-btn @click.stop="betAway" class="bet" color="primary">
                 <v-icon left dark>chevron_right</v-icon>
                 <span>{{ odds.away.toFixed(2) }}</span>
               </v-btn>
@@ -51,9 +52,26 @@
     <v-btn large color="accent" flat :href="`/#/fixtures/${fixture.id}`"><v-icon left>airplay</v-icon>Video highlights</v-btn>
   </v-card-actions>
 </v-card>
+<v-dialog v-model="dialog">
+  <v-card>
+    <v-card-title class="accent white--text">
+      <h4>{{ choiceLabel }}</h4>
+    </v-card-title>
+    <v-card-text>
+      <v-text-field :rules="[() => wallet >= amount || `You only have ${wallet} tokens`]" type="number" label="Amount" v-model="amount"></v-text-field>
+    </v-card-text>
+    <v-card-actions>
+      <v-spacer></v-spacer>
+      <v-btn @click.stop="placeBet" large flat color="accent">Place bet&nbsp;<img style="height: 25px;" src="../../assets/bet.red.svg" /></v-btn>
+    </v-card-actions>
+  </v-card>
+</v-dialog>
+</div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 import api from '@/helpers/url'
 
 const calculateOdds = (odds) => {
@@ -91,10 +109,15 @@ export default {
   name: 'fixture',
 
   data: () => ({
-    odds: null
+    odds: null,
+    dialog: false,
+    choice: null,
+    amount: 50
   }),
 
   computed: {
+    ...mapGetters(['wallet', 'id']),
+
     home () {
       if (!this.fixture) {
         return null
@@ -109,6 +132,58 @@ export default {
       }
 
       return this.fixture.VisitorTeam
+    },
+
+    choiceLabel () {
+      switch (this.choice) {
+        case '1':
+        case 1:
+          return this.home.name
+        case '2':
+        case 2:
+          return this.away.name
+        default:
+          return 'Draw'
+      }
+    }
+  },
+
+  methods: {
+    betHome () {
+      this.choice = 1
+      this.dialog = true
+    },
+
+    betDraw () {
+      this.choice = 0
+      this.dialog = true
+    },
+
+    betAway () {
+      this.choice = 2
+      this.dialog = true
+    },
+
+    placeBet () {
+      if (this.amount > this.wallet) {
+        return
+      }
+
+      this.dialog = false
+
+      try {
+        api.blockchain.postBet({
+          userID: this.id,
+          amount: this.amount,
+          fixtureID: this.fixture.id,
+          choice: this.choice
+        })
+
+        this.$store.dispatch('addMoney', { amount: -this.amount })
+      } catch (e) {
+        console.error(e)
+        // Display that the bet wasn't placed
+      }
     }
   },
 

@@ -6,6 +6,7 @@ import Index from '@/components/pages/Index'
 import ResultsPage from '@/components/pages/ResultsPage'
 import Team from '@/components/pages/Team'
 import Bet from '@/components/pages/Bet'
+import Bets from '@/components/pages/Bets'
 import FixtureDetail from '@/components/pages/FixtureDetail'
 import Standing from '@/components/pages/Standing'
 
@@ -29,9 +30,14 @@ export default new Router({
       component: HelloWorld
     },
     {
-      path: '/bet',
+      path: '/bets/:id',
       name: 'Bet',
       component: Bet
+    },
+    {
+      path: '/mybets',
+      name: 'Bets',
+      component: Bets
     },
     {
       path: '/teams/:id',
