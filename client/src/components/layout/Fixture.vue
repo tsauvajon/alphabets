@@ -180,7 +180,7 @@ export default {
         })
 
         this.$store.dispatch('addMoney', { amount: -this.amount })
-      } catch(e) {
+      } catch (e) {
         console.error(e)
         // Display that the bet wasn't placed
       }
