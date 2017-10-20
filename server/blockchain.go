@@ -119,7 +119,6 @@ func (app *App) getBetByID(w http.ResponseWriter, r *http.Request) {
 }
 
 func (app *App) createBet(w http.ResponseWriter, r *http.Request) {
-
 	var userID = r.FormValue("userID")
 	if userID == "" {
 		respondWithJSON(w, 400, "Invalid empty userID")
@@ -142,7 +141,7 @@ func (app *App) createBet(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	user, err := blockchain.CreateBet(userID, amount, eventID, choice)
+	bet, err := blockchain.CreateBet(userID, amount, eventID, choice)
 
 	if err != nil {
 		fmt.Println(err)
@@ -150,5 +149,7 @@ func (app *App) createBet(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	respondWithJSON(w, 200, user)
+	fmt.Println(bet)
+
+	respondWithJSON(w, 201, bet)
 }
