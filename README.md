@@ -5,11 +5,11 @@
 
 Chainblock applied to betting.
 
-Alpha for innovation - Bets for Betting => AlphaBets
+Alpha for innovation - Bets for football betting => AlphaBets
 
 ## SportMonks
 
-Special thanks to [SportMonks](https://sportmonks.com) for giving us access to the Ligue 1
+Special thanks to [SportMonks](https://sportmonks.com) for giving us access to the **Ligue 1**.
 ![SportMonks logo](https://www.sportmonks.com/images/logos/logo_black_top.png)
 
 ## Getting started
@@ -81,18 +81,15 @@ Browse http://localhost:{PORT}
 
 **Travis**
 
-Travis automatically runs tests and builds evrey push and pull request to every branch
+Travis automatically runs tests and builds evrey push and pull request to every branch.
 
 ## Deployment
 
-Requires Docker to be installed and running
+**Local deployment with Docker**
+
+Requires Docker to be installed and running.
 
 ``` bash
-cd client
-yarn
-yarn build
-
-cd ../server
 docker build -t alphabets .
 docker run --publish 3333:3333 --name alphabets --rm alphabets
 ```

@@ -1,0 +1,24 @@
+# Folders
+prez
+hyperledger
+
+# .
+.travis.yml
+.gitignore
+logo*
+Readme.md
+
+# client
+client/node_modules
+client/test
+client/.gitignore
+client/.editorconfig
+
+# server
+server/*.exe
+server/server
+server/dist
+server/LICENSE
+server/vendor
+Gopkg*
+client/.gitignore
