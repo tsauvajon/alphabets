@@ -24,12 +24,25 @@ RUN GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o alphabets
 
 ### Small container to execute the server
 # Small container to run the app
-FROM alpine
+# FROM alpine:3.6
+FROM octoblu/alpine-ca-certificates
 
-COPY --from=server /go/src/github.com/tsauvajon/ws-blockchain/server /root/
+# Add root ca certificates
+# RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.6/main/" >> /etc/apk/repositories \
+#     && echo "http://dl-1.alpinelinux.org/alpine/v3.6/main/" >> /etc/apk/repositories \
+#     && echo "http://dl-2.alpinelinux.org/alpine/v3.6/main/" >> /etc/apk/repositories \
+#     && echo "http://dl-3.alpinelinux.org/alpine/v3.6/main/" >> /etc/apk/repositories \
+#     && echo "http://dl-4.alpinelinux.org/alpine/v3.6/main/" >> /etc/apk/repositories \
+#     && echo "http://dl-5.alpinelinux.org/alpine/v3.6/main/" >> /etc/apk/repositories \
+#     && apk add --update --no-cache ca-certificates
 
-# Run the "./server" command when the container starts
 WORKDIR /root/
+
+COPY --from=server /go/src/github.com/tsauvajon/ws-blockchain/server/alphabets .
+COPY --from=server /go/src/github.com/tsauvajon/ws-blockchain/server/dist ./dist/
+COPY --from=server /go/src/github.com/tsauvajon/ws-blockchain/server/sportmonks/secret.json ./sportmonks/
+
+# Run the server when the container starts
 ENTRYPOINT ./alphabets
 
 # Listen to 3333
