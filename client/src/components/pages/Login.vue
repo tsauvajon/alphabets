@@ -20,7 +20,7 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn @click="connect" flat dark>
-          <span>Connexion</span>
+          <span>Connection</span>
           <v-icon v-if="!connecting" right>chevron_right</v-icon>
           <v-progress-circular indeterminate style="margin-left: 5px" v-else color="white"></v-progress-circular>
         </v-btn>
