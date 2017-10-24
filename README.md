@@ -85,11 +85,16 @@ Travis automatically runs tests and builds evrey push and pull request to every 
 
 ## Deployment
 
-**Local deployment with Docker**
+**Local deployment on Heroku with Docker**
 
 Requires Docker to be installed and running.
+Requires the Heroku CLI to be installed and the application to be created
 
 ``` bash
+heroku plugins:install heroku-container-registry
+heroku container:login
+heroku container:push web --app alpha-bets
+
 docker build -t alphabets .
 docker run --publish 3333:3333 --name alphabets --rm alphabets
 ```
