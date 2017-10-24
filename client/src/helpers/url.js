@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseUrl = 'http://localhost:3333'
+const baseUrl = 'https://alpha-bets.herokuapp.com'
 
 const apiPrefix = 'api'
 const soccerPrefix = 'soccer'

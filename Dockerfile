@@ -43,7 +43,7 @@ COPY --from=server /go/src/github.com/tsauvajon/ws-blockchain/server/dist ./dist
 COPY --from=server /go/src/github.com/tsauvajon/ws-blockchain/server/sportmonks/secret.json ./sportmonks/
 
 # Run the server when the container starts
-ENTRYPOINT ./alphabets
+CMD ./alphabets
 
 # Listen to 3333
 EXPOSE 3333
